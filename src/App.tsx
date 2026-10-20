@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ProtonReLinkShowcase } from './components/ProtonReLinkShowcase';
@@ -56,6 +57,9 @@ export default function App() {
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
       />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
