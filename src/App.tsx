@@ -8,6 +8,7 @@ import { ExperienceSection } from './components/ExperienceSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { Project } from './data/portfolioData';
+import { Analytics } from '@vercel/analytics/react';
 
 // Code-split heavy modals to minimize initial bundle size
 const ResumeModal = lazy(() =>
@@ -68,6 +69,9 @@ export default function App() {
           />
         )}
       </Suspense>
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }

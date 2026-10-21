@@ -16,8 +16,9 @@ import {
   Maximize2
 } from 'lucide-react';
 import { PROTON_RELINK_PROJECT } from '../data/portfolioData';
+import { ProtonReLinkPhoneApp, PhoneTab } from './ProtonReLinkPhoneApp';
 
-type TabKey = 'overview' | 'controls' | 'climate' | 'health' | 'find';
+type TabKey = PhoneTab;
 
 interface TabItem {
   id: TabKey;
@@ -48,6 +49,7 @@ export function ProtonReLinkShowcase() {
   const [isLocked, setIsLocked] = useState(true);
   const [isEngineOn, setIsEngineOn] = useState(false);
   const [isTrunkOpen, setIsTrunkOpen] = useState(false);
+  const [isWindowsVent, setIsWindowsVent] = useState(false);
   const [actionFeedback, setActionFeedback] = useState<string | null>(null);
 
   // Interactive climate states
@@ -193,47 +195,46 @@ export function ProtonReLinkShowcase() {
                 willChange: 'transform',
               }}
               transition={{ ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-[260px] sm:max-w-[280px] rounded-[42px] p-2.5 bg-zinc-950 border-[5px] border-zinc-800 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)] overflow-hidden transition-all duration-300 group"
+              className="relative w-full max-w-[290px] sm:max-w-[310px] rounded-[44px] p-2.5 bg-zinc-950 border-[5px] border-zinc-800 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)] overflow-hidden transition-all duration-300 group"
             >
               {/* Dynamic Island / Speaker notch */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-30 flex items-center justify-between px-2.5">
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-40 flex items-center justify-between px-2.5 pointer-events-none">
                 <div className="w-2 h-2 rounded-full bg-zinc-900 border border-zinc-800" />
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
 
-              {/* Screen Bezel Container */}
-              <div className="relative rounded-[32px] overflow-hidden bg-black aspect-[9/19.5] flex flex-col justify-start">
-                <img
-                  src={activeTabMeta.image}
-                  alt={activeTabMeta.label}
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-full h-full object-cover object-top transition-opacity duration-300"
+              {/* Screen Bezel Container with Live Interactive App */}
+              <div className="relative rounded-[34px] overflow-hidden bg-[#09090b] h-[580px] sm:h-[610px] flex flex-col justify-start">
+                <ProtonReLinkPhoneApp
+                  activeTab={activeTab}
+                  onTabChange={(tab) => setActiveTab(tab)}
+                  isLocked={isLocked}
+                  setIsLocked={setIsLocked}
+                  isEngineOn={isEngineOn}
+                  setIsEngineOn={setIsEngineOn}
+                  isTrunkOpen={isTrunkOpen}
+                  setIsTrunkOpen={setIsTrunkOpen}
+                  isWindowsVent={isWindowsVent}
+                  setIsWindowsVent={setIsWindowsVent}
+                  targetTemp={targetTemp}
+                  setTargetTemp={setTargetTemp}
+                  isAcOn={isAcOn}
+                  setIsAcOn={setIsAcOn}
+                  selectedTimer={selectedTimer}
+                  setSelectedTimer={setSelectedTimer}
+                  actionFeedback={actionFeedback}
+                  triggerControlAction={triggerControlAction}
                 />
 
                 {/* Subtle sheen highlight */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
-
-                {/* Floating feedback toast for interactive simulation */}
-                {actionFeedback && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute top-12 left-3 right-3 z-40 bg-zinc-900/95 border border-red-500/40 backdrop-blur-md rounded-xl p-2.5 shadow-2xl flex items-center gap-2 text-xs text-white"
-                  >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span className="font-medium text-[10px] leading-tight">{actionFeedback}</span>
-                  </motion.div>
-                )}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none z-40" />
               </div>
             </motion.div>
 
             <span className="text-[11px] font-mono text-zinc-500 mt-4 flex items-center gap-1.5">
-              <span>Scroll to test velocity tilt</span>
+              <span>Interactive Mockup</span>
               <span aria-hidden="true">·</span>
-              <span>Actual In-App Screen</span>
+              <span>Fully Functional Simulator</span>
             </span>
           </div>
 
