@@ -138,12 +138,15 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                   drag
                   dragConstraints={{ left: -35, right: 35, top: -35, bottom: 35 }}
                   dragElastic={0.2}
-                  style={{ transformStyle: "preserve-3d" }}
+                  style={{ transformStyle: "preserve-3d", willChange: "transform" }}
                   className="relative w-48 h-48 flex items-center justify-center p-4 rounded-3xl bg-zinc-950/85 border border-white/15 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)] backdrop-blur-2xl group-hover:border-red-500/40 transition-colors duration-300 cursor-grab active:cursor-grabbing select-none"
                 >
                   <motion.img
                     src={PERSONAL_INFO.brandLogo}
                     alt={PERSONAL_INFO.brandName}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                     animate={{
                       filter: [
                         "drop-shadow(0 10px 22px rgba(239,68,68,0.35))",

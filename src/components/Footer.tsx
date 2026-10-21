@@ -44,7 +44,7 @@ export function Footer() {
               Contact
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/danielaniq28"
               target="_blank"
               rel="noreferrer"
               className="hover:text-white transition-colors flex items-center gap-1"

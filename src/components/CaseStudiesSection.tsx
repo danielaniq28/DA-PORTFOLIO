@@ -105,6 +105,8 @@ export function CaseStudiesSection({ onSelectProject }: CaseStudiesSectionProps)
                 <img
                   src={project.thumbnail}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain filter group-hover:scale-[1.02] transition-transform duration-500"
                 />
               </div>

@@ -46,6 +46,7 @@ export const PERSONAL_INFO = {
   phone: "+60195007428",
   email: "danielaniq@danielaniq.com",
   website: "https://www.danielaniq.com",
+  github: "https://github.com/danielaniq28",
   location: "Georgetown, Pulau Pinang, Malaysia",
   resumePdf: "/assets/aistudio/new_simple_resume_88eb8aa2.pdf",
   bio: "Passionate systems engineer and technical problem solver with a deep background in hardware validation, network infrastructure, and real-time telematics. Currently operating at the highest escalation tier for Apple ecosystem engineering, with hands-on experience bridging reverse-engineered IoT protocols and clean, consumer-grade digital interfaces.",

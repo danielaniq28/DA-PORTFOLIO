@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useVelocity, useSpring, useTransform } from 'motion/react';
 import {
   ExternalLink,
@@ -29,6 +29,20 @@ interface TabItem {
 
 export function ProtonReLinkShowcase() {
   const [activeTab, setActiveTab] = useState<TabKey>('overview');
+
+  // Preload tab screenshots in background for 0ms tab switching
+  useEffect(() => {
+    const images = [
+      '/assets/aistudio/IMG_6636_97dc09cd.PNG',
+      '/assets/aistudio/IMG_6637_7b56e946.PNG',
+      '/assets/aistudio/IMG_6638_90189256.PNG',
+      '/assets/aistudio/IMG_6639_8e719934.PNG',
+    ];
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   // Interactive simulation states for controls tab
   const [isLocked, setIsLocked] = useState(true);
@@ -176,6 +190,7 @@ export function ProtonReLinkShowcase() {
                 rotateX: deviceRotateX,
                 scale: deviceScale,
                 transformPerspective: 1200,
+                willChange: 'transform',
               }}
               transition={{ ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full max-w-[260px] sm:max-w-[280px] rounded-[42px] p-2.5 bg-zinc-950 border-[5px] border-zinc-800 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)] overflow-hidden transition-all duration-300 group"
@@ -191,6 +206,9 @@ export function ProtonReLinkShowcase() {
                 <img
                   src={activeTabMeta.image}
                   alt={activeTabMeta.label}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full h-full object-cover object-top transition-opacity duration-300"
                 />
 
