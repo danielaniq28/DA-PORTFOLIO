@@ -10,10 +10,10 @@ export function CaseStudiesSection({ onSelectProject }: CaseStudiesSectionProps)
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'cloud', label: 'Cloud Systems' },
-    { id: 'hardware', label: 'Hardware & QA' },
-    { id: 'creative', label: 'Brand & Web' },
+    { id: 'all', label: 'All Projects', shortLabel: 'All' },
+    { id: 'cloud', label: 'Cloud Systems', shortLabel: 'Cloud' },
+    { id: 'hardware', label: 'Hardware & QA', shortLabel: 'Hardware' },
+    { id: 'creative', label: 'Brand & Web', shortLabel: 'Brand' },
   ];
 
   const filteredProjects = OTHER_PROJECTS.filter((project) => {
@@ -50,19 +50,20 @@ export function CaseStudiesSection({ onSelectProject }: CaseStudiesSectionProps)
             </h2>
           </div>
 
-          {/* Interactive Filter Tabs (Functional segmented controls allowed by constitution) */}
-          <div className="flex items-center gap-1 p-1 bg-zinc-900/80 border border-white/10 rounded-xl self-start md:self-auto overflow-x-auto">
+          {/* Interactive Filter Tabs */}
+          <div className="grid grid-cols-4 sm:flex items-center gap-1 p-1 bg-zinc-900/80 border border-white/10 rounded-xl w-full sm:w-auto">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all whitespace-nowrap cursor-pointer ${
+                className={`px-2 sm:px-3.5 py-1.5 text-[11px] sm:text-xs font-medium rounded-lg transition-all text-center whitespace-nowrap cursor-pointer ${
                   activeCategory === cat.id
                     ? 'bg-zinc-800 text-white shadow-sm'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                {cat.label}
+                <span className="sm:hidden">{cat.shortLabel}</span>
+                <span className="hidden sm:inline">{cat.label}</span>
               </button>
             ))}
           </div>
